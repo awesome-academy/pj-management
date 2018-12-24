@@ -76,4 +76,11 @@ Class DbTaskRepository implements TaskInterface{
 
         return $taskOwner;
     }
+
+    public function taskOnExercise($id)
+    {
+        $taskEx = Task::with('exercise.task', 'user')->where('exercise_id', $id)->get();
+
+        return $taskEx;
+    }
 }

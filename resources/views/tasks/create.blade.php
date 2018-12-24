@@ -26,6 +26,7 @@
                         <div class="col-sm-10">
                             {!! Form::text('exercise', $exercise->name, ['class' => 'form-control', 'readonly']) !!}
                             {!! Form::hidden('exercise_id', $exercise->id, ['class' => 'form-control', 'readonly']) !!}
+                            {!! Form::hidden('user_id', Auth::id(), ['class' => 'form-control', 'readonly']) !!}
                         </div>
                     </div>
                     <div class="form-group row">
@@ -35,7 +36,7 @@
                         </div>
                     </div>
                     <div class="form-group row">
-                        {!! Form::label('file', __('eng.image'), ['class' => 'col-sm-3 col-form-label control-label']) !!}
+                        {!! Form::label('file', __('eng.file'), ['class' => 'col-sm-3 col-form-label control-label']) !!}
                         <div class="col-sm-10">
                             {!! Form::file('file', null, ['class' => 'form-control']) !!}
                         </div>

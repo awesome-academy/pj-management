@@ -11,33 +11,56 @@
 |
 */
 Route::get('/', 'PageController@home');
-Route::group(['prefix' => 'subject'], function() {
+Route::group(['middleware' => 'auth', 'prefix' => 'subject'], function() {
     Route::get('/create', 'SubjectController@showCreateForm');
     Route::post('/create', 'SubjectController@create');
     Route::get('/', 'SubjectController@getAllSubjects');
+    Route::get('{id}/delete', 'SubjectController@delete');
 });
 
-Route::group(['prefix' => 'group'], function() {
-    Route::get('create', 'GroupController@showCreateForm');
+Route::group(['middleware' => 'auth', 'prefix' => 'group'], function() {
+    Route::get('create', 'GroupController@showCreateForm')->name('createGroup');
     Route::post('create', 'GroupController@create');
     Route::get('/', 'GroupController@getAllGroups');
     Route::get('/{id}/exercise', 'ExerciseController@getExercise');
     Route::get('/{id}/detail', 'GroupController@show');
     Route::get('/{id}/delete', 'GroupController@delete');
+    Route::get('/{id}/join', 'GroupController@joinGroup');
+    Route::get('{id}/members', 'GroupController@groupUser');
+    Route::get('myGroups', 'GroupController@myGroups')->name('myGroup');
+    Route::get('{id}/delete', 'GroupController@delete');
+    Route::get('{id}/edit', 'GroupController@showUpdate')->name('edit_group');
+    Route::put('{id}/edit', 'GroupController@update');
 });
 
-Route::group(['prefix' => 'task'], function() {
+Route::group(['middleware' => 'auth', 'prefix' => 'task'], function() {
     Route::get('{id}/create', 'TaskController@showUploadForm');
     Route::post('{id}/create', 'TaskController@upload');
     Route::get('/', 'TaskController@getAll');
     Route::get('{id}/delete', 'TaskController@delete');
     Route::get('{id}/download', 'TaskController@download');
+    Route::get('{id}/owner', 'TaskController@taskOwner');
 });
 
-Route::group(['prefix' => 'exercise'], function() {
+Route::group(['middleware' => 'auth', 'prefix' => 'exercise'], function() {
     Route::get('/', 'ExerciseController@getAll');
     Route::get('{id}/create', 'ExerciseController@showCreateForm');
     Route::post('{id}/create', 'ExerciseController@upload');
     Route::get('{id}/detail', 'ExerciseController@show');
     Route::get('{id}/delete', 'ExerciseController@delete');
+    Route::get('{id}/task', 'TaskController@taskOnExercise');
+});
+
+Auth::routes();
+
+Route::get('/home', 'HomeController@index')->name('home');
+
+Route::group(['middleware' => ['auth', 'admin'], 'prefix' => 'user'], function() {
+    Route::get('/create', 'UserController@getCreate');
+    Route::post('/postCreate', 'UserController@postCreate')->name('userCreate');
+    Route::get('{id}/create', 'ExerciseController@showCreateForm');
+    Route::post('{id}/create', 'ExerciseController@upload');
+    Route::get('{id}/detail', 'UserController@show');
+    Route::get('{id}/delete', 'UserController@delete');
+    Route::get('/', 'UserController@getAll');
 });

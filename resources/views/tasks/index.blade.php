@@ -23,10 +23,10 @@
                 <tbody>
                 @foreach ($task as $task)
                     <tr>
-                        <th scope="row">{{ $task->id }}</th>
-                        <td><a href="{{ url('task/' . $task->id . '/detail') }}">{{ $task->name }}</a></td>
-                        <td><a href="{{ url('task/' . $task->id . '/download') }}" class="btn btn-gradient-info">{{ __('eng.download') }}</a></td>
-                        <td><a href="{{ url('task/' . $task->id . '/delete') }}" onclick="return confirm('{{__('eng.del_confirm')}}');">{{ __('eng.del') }}</a></td>
+                        <th scope="row">{{ $task['id'] }}</th>
+                        <td>{{ $task['name'] }}</td>
+                        <td><a href="{{ url('task/' . $task['id'] . '/download') }}" class="btn btn-gradient-info">{{ __('eng.download') }}</a></td>
+                        <td><a href="{{ url('task/' . $task['id'] . '/delete') }}" onclick="return confirm('{{__('eng.del_confirm')}}');">{{ __('eng.del') }}</a></td>
                     </tr>
                 @endforeach
                 </tbody>
