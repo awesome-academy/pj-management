@@ -26,6 +26,13 @@ class TaskController extends Controller
         return view('tasks.index', compact('task'));
     }
 
+    public function taskOnExercise($id)
+    {
+        $task = $this->task->taskOnExercise($id);
+
+        return view('tasks.index', compact('task'));
+    }
+
     public function showUploadForm($id)
     {
         $exercise = $this->exercise->getById($id);
@@ -37,19 +44,25 @@ class TaskController extends Controller
     {
         $attribute = $request->all();
         $this->task->create($attribute);
+        $exercise_id = $attribute['exercise_id'];
 
-        return redirect('task')->with('status', __('eng.upload_success'));
+        return redirect('exercise/' . $exercise_id . '/detail')->with('status', __('eng.upload_success'));
     }
 
     public function delete($id)
     {
         $this->task->delete($id);
 
-        return redirect('task')->with('status', __('eng.del_success'));;
+        return redirect()->back()->with('status', __('eng.del_success'));;
     }
 
     public function download($id)
     {
         return $this->task->download($id);
+    }
+
+    public function taskOwner($id)
+    {
+        $this->task->taskOwner($id);
     }
 }

@@ -23,9 +23,9 @@ class SubjectController extends Controller
     public function create(SubjectFormRequest $request)
     {
         $attribute = $request->all();
-        $subject = $this->subject->create($attribute);
+        $this->subject->create($attribute);
 
-        return view('subjects.create', compact('subject'));
+        return redirect()->back()->with('status', __('eng.created_sucess'));
     }
 
     public function getAllSubjects()
@@ -33,5 +33,12 @@ class SubjectController extends Controller
         $subject = $this->subject->getAllSubjects();
 
         return view('subjects.index')->with(['subject' => $subject]);
+    }
+
+    public function delete($id)
+    {
+        $this->subject->delete($id);
+
+        return redirect()->back()->with('status', __('eng.del_success'));;
     }
 }
