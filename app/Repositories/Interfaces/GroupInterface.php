@@ -15,4 +15,6 @@ interface GroupInterface
     public function delete($id);
 
     public function myGroups();
+
+    public function groupOwner($id);
 }

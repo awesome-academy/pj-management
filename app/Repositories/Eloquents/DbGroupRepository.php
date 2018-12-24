@@ -51,10 +51,21 @@ Class DbGroupRepository implements GroupInterface{
 
     public function update($id, array $attribute)
     {
-        $class = $this->model->findOrFail($id);
-        $class = $this->model->update($attribute);
+        $file = $attribute['group_image'];
+        if (isset($file)) {
+            $name = $file->getClientOriginalName();
+            $group_image = str_random(4) . '_' . $name;
+            while (file_exists(config('app.group_image') . $group_image)) {
+                $group_image = str_random(4) . '_' . $name;
+            }
+            $file->move(config('app.group_image'), $group_image);
+            $this->model->group_image = $name;
+        } else {
+            $this->model->group_image = '';
+        }
+        $attribute['group_image'] = $group_image;
 
-        return $class;
+        return $group->update($attribute);
     }
 
     public function delete($id)
@@ -69,5 +80,14 @@ Class DbGroupRepository implements GroupInterface{
         $groupUser = GroupUser::with('group.groupUser')->where('user_id', Auth::id())->get()->toArray();
 
         return $groupUser;
+    }
+
+    public function groupOwner($id)
+    {
+        $group = $this->model->findOrFail($id);
+        $user_id = $group['user_id'];
+        $user = User::with('groups')->where('id', $user_id)->get();
+
+        return $user;
     }
 }

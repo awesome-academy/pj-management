@@ -26,7 +26,7 @@
                             {!! Form::text('description', null, ['class' => 'form-control']) !!}
                         </div>
                         <div class="col-sm-10">
-                            {!! Form::text('group_id', $group->id, ['class' => 'form-control', 'readonly']) !!}
+                            {!! Form::hidden('group_id', $group->id, ['class' => 'form-control', 'readonly']) !!}
                             {!! $errors->first('group_id', '<span class="validate-error">:message</span>') !!}
                         </div>
                         <div class="col-sm-6">

@@ -30,4 +30,9 @@ mix.scripts(
         'resources/assets/js/app.min.js'
     ], 'public/js/template-js.js');
 mix.copy('node_modules/jquery-sparkline/jquery.sparkline.js', 'public/js/template-jquery.js');
+mix.copy('resources/assets/css/style.css', 'public/css/style.css');
 mix.copy('resources/assets/js/dashboard/default.js', 'public/js/default.js');
+mix.copy('node_modules/jquery/dist/jquery.js', 'public/js/bootstrap1.js');
+mix.copy('node_modules/bootstrap/dist/js/bootstrap.js', 'public/js/datepicker.js');
+mix.copy('node_modules/bootstrap-datepicker/dist/js/bootstrap-datepicker.js', 'public/js/datepicker.js');
+mix.copy('node_modules/bootstrap-datepicker/dist/css/bootstrap-datepicker3.css', 'public/js/datepicker.css');
