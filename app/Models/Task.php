@@ -13,5 +13,16 @@ class Task extends Model
         'link',
         'file',
         'exercise_id',
+        'user_id',
     ];
+
+    public function user()
+    {
+        return $this->belongsTo('App\User');
+    }
+
+    public function exercise()
+    {
+        return $this->belongsTo('App\Models\Exercise');
+    }
 }
