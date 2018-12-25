@@ -16,7 +16,7 @@ return [
     'file' => 'storage/app/',
     'task' => 'public/files/',
     'name' => env('APP_NAME', 'Laravel'),
-
+    'student' => 1,
     /*
     |--------------------------------------------------------------------------
     | Application Environment

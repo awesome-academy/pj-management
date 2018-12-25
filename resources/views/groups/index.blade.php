@@ -9,11 +9,11 @@
                     <div class="card-body">
                         <h4 class="card-title m-t-10"><a href="{{ url('group/' . $group->id . '/detail') }}">{{ $group->name }}</a></h4>
                         <p class="card-text">{{ $group->description }}</p>
-                        <p class="card-text">{{ $group->subject_id }}</p>
-                        <p class="card-text">{{ $group->group_image }}</p>
                         <div class="m-t-20">
-                            <a href="#" class="btn btn-gradient-success">Join group</a>
+                            <a href="{{ url('group/' . $group->id . '/join') }}" class="btn btn-gradient-success">{{ __('eng.joinGroup') }}</a>
+                            @can('delete', $group)
                             <a href="{{ url('group/' . $group->id . '/delete') }}"  class="btn btn-gradient-warning" onclick="return confirm('{{__('eng.del_confirm')}}');">{{  __('eng.del') }}</a>
+                            @endcan
                         </div>
                     </div>
                 </div>

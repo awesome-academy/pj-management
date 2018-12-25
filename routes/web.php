@@ -56,11 +56,11 @@ Auth::routes();
 Route::get('/home', 'HomeController@index')->name('home');
 
 Route::group(['middleware' => ['auth', 'admin'], 'prefix' => 'user'], function() {
-    Route::get('/create', 'UserController@getCreate');
+    Route::get('/create', 'UserController@getCreate')->name('createUser');
     Route::post('/postCreate', 'UserController@postCreate')->name('userCreate');
     Route::get('{id}/create', 'ExerciseController@showCreateForm');
     Route::post('{id}/create', 'ExerciseController@upload');
     Route::get('{id}/detail', 'UserController@show');
     Route::get('{id}/delete', 'UserController@delete');
-    Route::get('/', 'UserController@getAll');
+    Route::get('/', 'UserController@getAll')->name('viewUser');
 });
