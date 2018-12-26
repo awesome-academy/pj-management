@@ -51,6 +51,7 @@ Class DbGroupRepository implements GroupInterface{
 
     public function update($id, array $attribute)
     {
+        $group = $this->model->getById($id);
         $file = $attribute['group_image'];
         if (isset($file)) {
             $name = $file->getClientOriginalName();

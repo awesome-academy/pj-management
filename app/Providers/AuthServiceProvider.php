@@ -2,6 +2,11 @@
 
 namespace App\Providers;
 
+use App\Models\Exercise;
+use App\Models\Group;
+use App\Policies\ExercisePolicy;
+use App\Policies\GroupPolicy;
+use App\User;
 use Illuminate\Support\Facades\Gate;
 use Illuminate\Foundation\Support\Providers\AuthServiceProvider as ServiceProvider;
 
@@ -14,6 +19,8 @@ class AuthServiceProvider extends ServiceProvider
      */
     protected $policies = [
         'App\Model' => 'App\Policies\ModelPolicy',
+        Group::class => GroupPolicy::class,
+        Exercise::class => ExercisePolicy::class,
     ];
 
     /**
@@ -24,7 +31,5 @@ class AuthServiceProvider extends ServiceProvider
     public function boot()
     {
         $this->registerPolicies();
-
-        //
     }
 }

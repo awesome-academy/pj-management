@@ -9,4 +9,10 @@ interface UserInterface
     public function create(array $attribute);
 
     public function getAll();
+
+    public function getById($id);
+
+    public function update($id);
+
+    public function delete($id);
 }

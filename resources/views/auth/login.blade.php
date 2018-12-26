@@ -6,7 +6,16 @@
         <div class="col-md-8">
             <div class="card">
                 <div class="card-header">{{ __('Login') }}</div>
-
+                @if (session('status'))
+                    <div class="alert alert-info-gradient">
+                        {{ session('status') }}
+                    </div>
+                @endif
+                @if (session('warning'))
+                    <div class="alert alert-danger-gradient">
+                        {{ session('warning') }}
+                    </div>
+                @endif
                 <div class="card-body">
                     {!! Form::open(['id' => 'form-validation', 'method' => 'POST', 'route' => 'login' ]) !!}
                         @csrf

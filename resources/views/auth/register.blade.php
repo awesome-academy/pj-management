@@ -12,7 +12,7 @@
                         </div>
                     @endif
                     <div class="card-body">
-                        {!! Form::open(['id' => 'form-validation', 'method' => 'POST', 'route' => 'userCreate' ]) !!}
+                        {!! Form::open(['id' => 'form-validation', 'method' => 'POST', 'route' => 'postCreateUser' ]) !!}
                         <div class="form-group row">
                             {{ Form::label('name', __('eng.name'), ['class' => 'col-md-4 col-form-label text-md-right']) }}
                             <div class="col-md-6">
@@ -57,6 +57,7 @@
                             <div class="col-md-8">
                                 {{ Form::radio('role_id', '1', ['readonly' => 'readonly', 'checked' => 'checked']) }}
                                 {{ Form::label('role', 'Student', ['class' => 'col-md-3 col-form-label text-md-right']) }}
+                                {!! Form::hidden('status', '1', ['class' => 'form-control', 'readonly']) !!}
                             </div>
                         </div>
                         <div class="form-group row">
