@@ -28,7 +28,9 @@
                     <tr>
                         <th scope="row">{{ $ex->id }}</th>
                         <td><a href="{{ url('exercise/' . $ex->id . '/detail') }}">{{ $ex->name }}</a></td>
+                        @if (isset($ex->user))
                         <td><a href="{{ url('user/' . $ex->user->id . '/detail') }}">{{ $ex->user->name }}</a></td>
+                        @endif
                         @can('deleteEx', $group)
                         <td><a href="{{ url('exercise/' . $ex->id . '/delete') }}" onclick="return confirm('{{ __('eng.del_confirm') }}')">{{ __('eng.del') }}</a></td>
                         @endcan

@@ -96,7 +96,7 @@ class GroupController extends Controller
     {
         $group = $this->group->myGroups();
 
-        return view('groups.list', compact('group'));
+        return view('groups.index', compact('group'));
     }
 
     public function showUpdate($id)

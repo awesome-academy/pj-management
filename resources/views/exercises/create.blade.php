@@ -16,7 +16,7 @@
                     {!! Form::open(['id' => 'form-validation', 'method' => 'POST', 'enctype' => 'multipart/form-data', 'routes' => 'exercise/' . $group->id . '/create']) !!}
                     @csrf
                     <div class="form-group row">
-                        {!! Form::label('name', __('eng.group_name'), ['class' => 'col-sm-3 col-form-label control-label']) !!}
+                        {!! Form::label('name', __('eng.exercise_name'), ['class' => 'col-sm-3 col-form-label control-label']) !!}
                         <div class="col-sm-10">
                             {!! Form::text('name', null, ['class' => 'form-control']) !!}
                             {!! $errors->first('name', '<span class="validate-error">:message</span>') !!}
