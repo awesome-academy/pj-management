@@ -16,5 +16,7 @@ interface GroupInterface
 
     public function myGroups();
 
+    public function joined();
+
     public function groupOwner($id);
 }

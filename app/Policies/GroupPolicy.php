@@ -5,6 +5,7 @@ namespace App\Policies;
 use App\User;
 use App\Models\Group;
 use Illuminate\Auth\Access\HandlesAuthorization;
+use Illuminate\Support\Facades\Auth;
 
 class GroupPolicy
 {
@@ -30,7 +31,7 @@ class GroupPolicy
      */
     public function create(User $user)
     {
-        return $user->role_id !== config('app.student');
+        return $user->role_id != config('app.student');
     }
 
     public function createEx(User $user, Group $group)
@@ -46,7 +47,7 @@ class GroupPolicy
      */
     public function update(User $user, Group $group)
     {
-        return $user->id === $group->user_id;
+        return $user->id == $group->user_id;
     }
 
     /**
@@ -58,7 +59,7 @@ class GroupPolicy
      */
     public function delete(User $user, Group $group)
     {
-        return $user->id === $group->user_id;
+        return $user->id == $group->user_id;
     }
 
     public function deleteEx(User $user, Group $group)

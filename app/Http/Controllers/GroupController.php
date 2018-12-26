@@ -119,4 +119,11 @@ class GroupController extends Controller
 
         return redirect('group')->with('status', __('eng.create_success'));
     }
+
+    public function joined()
+    {
+        $group = $this->group->joined();
+
+        return view('groups.joined', compact('group'));
+    }
 }

@@ -34,4 +34,18 @@ class UserController extends Controller
 
         return redirect()->back()->with('status', __('eng.create_sucess'));
     }
+
+    public function confirm($id)
+    {
+        $this->user->update($id);
+
+        return redirect('login')->with('status', __('eng.confirm'));
+    }
+
+    public function delete($id)
+    {
+        $this->user->delete($id);
+
+        return redirect('user')->with('status', __('eng.del_success'));
+    }
 }

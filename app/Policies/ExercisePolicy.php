@@ -56,7 +56,7 @@ class ExercisePolicy
      */
     public function delete(User $user, Exercise $exercise)
     {
-        return $user->id === $exercise->user_id;
+        return $user->id == $exercise->user_id;
     }
 
     /**

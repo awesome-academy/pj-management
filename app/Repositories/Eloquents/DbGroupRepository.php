@@ -51,7 +51,7 @@ Class DbGroupRepository implements GroupInterface{
 
     public function update($id, array $attribute)
     {
-        $group = $this->model->getById($id);
+        $group = $this->model->findOrFail($id);
         $file = $attribute['group_image'];
         if (isset($file)) {
             $name = $file->getClientOriginalName();
@@ -78,9 +78,16 @@ Class DbGroupRepository implements GroupInterface{
 
     public function myGroups()
     {
-        $groupUser = GroupUser::with('group.groupUser')->where('user_id', Auth::id())->get()->toArray();
+        $groupUser = Group::with('user')->where('user_id', Auth::id())->get();
 
         return $groupUser;
+    }
+
+    public function joined()
+    {
+        $group= GroupUser::with('group')->where('user_id', Auth::id())->get();
+
+        return $group;
     }
 
     public function groupOwner($id)
