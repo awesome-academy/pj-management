@@ -38,7 +38,6 @@ class ExerciseController extends Controller
         } else {
             return redirect()->back()->with('status', __('eng.cannot'));
         }
-
     }
 
     public function upload(ExerciseFormRequest $request)

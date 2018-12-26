@@ -29,7 +29,9 @@
             <img class="card-img-top" src="{{ asset(config('app.group_image') . $group->group_image) }}" alt="#">
             <div class="card-text">
                 <h1>{{ $group->name }}</h1>
+                @if (isset($group->user))
                 <h5>{{ __('eng.created_by') }} <a href="#">{{ $group->user->name }}</a></h5>
+                @endif
             </div>
             <div class="content">
                 <p>{{ $group->description }}</p>

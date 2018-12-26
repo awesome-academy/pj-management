@@ -17,6 +17,8 @@ return [
     'task' => 'public/files/',
     'name' => env('APP_NAME', 'Laravel'),
     'student' => 1,
+    'status_confirm' => 2,
+    'admin' => 3,
     /*
     |--------------------------------------------------------------------------
     | Application Environment
@@ -41,7 +43,7 @@ return [
     |
     */
 
-    'debug' => env('APP_DEBUG', false),
+    'debug' => env('APP_DEBUG', true),
 
     /*
     |--------------------------------------------------------------------------

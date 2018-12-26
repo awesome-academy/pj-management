@@ -44,7 +44,7 @@ Class DbUserRepository implements UserInterface
     public function update($id)
     {
         $user = $this->model->findOrFail($id);
-        $user['status'] = 2;
+        $user['status'] = config('app.status_confirm');
 
         return $user->save();
     }
