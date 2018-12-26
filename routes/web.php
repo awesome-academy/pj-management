@@ -1,5 +1,4 @@
 <?php
-
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -10,15 +9,16 @@
 | contains the "web" middleware group. Now create something great!
 |
 */
+
 Route::get('/', 'PageController@home');
-Route::group(['middleware' => 'auth', 'prefix' => 'subject'], function() {
+Route::group(['middleware' => ['auth', 'confirmation'], 'prefix' => 'subject'], function() {
     Route::get('/create', 'SubjectController@showCreateForm');
     Route::post('/create', 'SubjectController@create');
     Route::get('/', 'SubjectController@getAllSubjects');
     Route::get('{id}/delete', 'SubjectController@delete');
 });
 
-Route::group(['middleware' => 'auth', 'prefix' => 'group'], function() {
+Route::group(['middleware' => ['auth', 'confirmation'], 'prefix' => 'group'], function() {
     Route::get('create', 'GroupController@showCreateForm')->name('createGroup');
     Route::post('create', 'GroupController@create');
     Route::get('/', 'GroupController@getAllGroups');
@@ -33,7 +33,7 @@ Route::group(['middleware' => 'auth', 'prefix' => 'group'], function() {
     Route::put('{id}/edit', 'GroupController@update');
 });
 
-Route::group(['middleware' => 'auth', 'prefix' => 'task'], function() {
+Route::group(['middleware' => ['auth', 'confirmation'], 'prefix' => 'task'], function() {
     Route::get('{id}/create', 'TaskController@showUploadForm');
     Route::post('{id}/create', 'TaskController@upload');
     Route::get('/', 'TaskController@getAll');
@@ -42,7 +42,7 @@ Route::group(['middleware' => 'auth', 'prefix' => 'task'], function() {
     Route::get('{id}/owner', 'TaskController@taskOwner');
 });
 
-Route::group(['middleware' => 'auth', 'prefix' => 'exercise'], function() {
+Route::group(['middleware' => ['auth', 'confirmation'], 'prefix' => 'exercise'], function() {
     Route::get('/', 'ExerciseController@getAll');
     Route::get('{id}/create', 'ExerciseController@showCreateForm');
     Route::post('{id}/create', 'ExerciseController@upload');
@@ -55,12 +55,13 @@ Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
 
-Route::group(['middleware' => ['auth', 'admin'], 'prefix' => 'user'], function() {
+Route::group(['middleware' => ['auth', 'confirmation'], 'prefix' => 'user'], function() {
     Route::get('/create', 'UserController@getCreate')->name('createUser');
-    Route::post('/postCreate', 'UserController@postCreate')->name('userCreate');
+    Route::post('/postCreate', 'UserController@postCreate')->name('postCreateUser');
     Route::get('{id}/create', 'ExerciseController@showCreateForm');
     Route::post('{id}/create', 'ExerciseController@upload');
     Route::get('{id}/detail', 'UserController@show');
     Route::get('{id}/delete', 'UserController@delete');
     Route::get('/', 'UserController@getAll')->name('viewUser');
 });
+Route::get('account/{id}/confirm', 'UserController@confirm')->name('MailConfirm')->middleware('check.guest');

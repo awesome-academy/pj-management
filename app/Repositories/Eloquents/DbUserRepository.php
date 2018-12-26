@@ -24,6 +24,11 @@ Class DbUserRepository implements UserInterface
         return $groupUser;
     }
 
+    public function getById($id)
+    {
+        return $this->model->findOrFail($id);
+    }
+
     public function create(array $attribute)
     {
         $attribute['password'] = Hash::make($attribute['password']);
@@ -34,5 +39,20 @@ Class DbUserRepository implements UserInterface
     public function getAll()
     {
         return $this->model->all();
+    }
+
+    public function update($id)
+    {
+        $user = $this->model->findOrFail($id);
+        $user['status'] = 2;
+
+        return $user->save();
+    }
+
+    public function delete($id)
+    {
+        $this->model->findOrFail($id)->delete();
+
+        return true;
     }
 }
