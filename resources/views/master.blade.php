@@ -12,7 +12,9 @@
     </head>
     <body>
         @include('shared.menu')
+        @if (Auth::check())
         @include('shared.sidebar')
+        @endif
         <div class="page-container">
             <div class="main-content">
                 <div class="container-fluid">

@@ -4,9 +4,12 @@ namespace App\Http\Controllers\Auth;
 
 use App\User;
 use App\Http\Controllers\Controller;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Foundation\Auth\RegistersUsers;
+use App\Jobs\SendMailForRegister;
 
 class RegisterController extends Controller
 {
@@ -29,6 +32,7 @@ class RegisterController extends Controller
      * @var string
      */
     protected $redirectTo = '/home';
+    const MINUTE_DELAY_EMAIL = 5;
 
     /**
      * Create a new controller instance.
@@ -67,7 +71,35 @@ class RegisterController extends Controller
             'name' => $data['name'],
             'email' => $data['email'],
             'role_id' => $data['role_id'],
+            'status' => $data['status'],
             'password' => Hash::make($data['password']),
         ]);
+    }
+
+    public function register(Request $data)
+    {
+        $create = DB::transaction(function() use($data) {
+            try {
+                $user = User::create([
+                    'name' => $data['name'],
+                    'email' => $data['email'],
+                    'role_id' => $data['role_id'],
+                    'status' => $data['status'],
+                    'password' => Hash::make($data['password']),
+                ]);
+                dispatch(new SendMailForRegister($user))->delay(now()->addSeconds(self::MINUTE_DELAY_EMAIL));
+                DB::commit();
+
+                if (isset($user)) {
+                    return redirect('login')->with('status', __('eng.registered'));
+                }
+            } catch(\Exception $e) {
+                DB::rollBack();
+
+                return $e;
+            }
+        });
+
+        return $create;
     }
 }
