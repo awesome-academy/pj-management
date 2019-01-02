@@ -17,9 +17,9 @@ class UserController extends Controller
     }
     public function getAll()
     {
-        $user = $this->user->getAll();
+        $users = $this->user->getAll();
 
-        return view('users.index', compact('user'));
+        return view('users.index', compact('users'));
     }
 
     public function getCreate()

@@ -63,12 +63,8 @@
                                     {{ Form::label('role', 'Admin', ['class' => 'col-md-3 col-form-label text-md-right']) }}
                                 </div>
                             </div>
-                            <div class="form-group row">
-                                <div class="col-md-8">
-                                    {!! Form::submit(__('eng.btn_submit'), ['class' => 'btn btn-gradient-success']) !!}
-                                    {!! Form::reset(__('eng.btn_reset'), ['class' => 'btn btn-gradient-default']) !!}
-                                </div>
-                            </div>
+                            {!! Form::submit(__('eng.btn_submit'), ['class' => 'btn btn-gradient-success']) !!}
+                            {!! Form::reset(__('eng.btn_reset'), ['class' => 'btn btn-gradient-default']) !!}
                         {!! Form::close() !!}
                     </div>
                 </div>
