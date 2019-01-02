@@ -31,6 +31,7 @@ Route::group(['middleware' => ['auth', 'confirmation'], 'prefix' => 'group'], fu
     Route::get('{id}/delete', 'GroupController@delete');
     Route::get('{id}/edit', 'GroupController@showUpdate')->name('edit_group');
     Route::put('{id}/edit', 'GroupController@update');
+    Route::get('joined', 'GroupController@joined')->name('joinedGroup');
 });
 
 Route::group(['middleware' => ['auth', 'confirmation'], 'prefix' => 'task'], function() {

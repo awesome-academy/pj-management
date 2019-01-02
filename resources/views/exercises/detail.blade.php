@@ -16,7 +16,9 @@
         <div class="card-body">
             <div class="card-text">
                 <h1>{{ $exercise->name }}</h1>
+                @if (isset($exercise->user))
                 <h5>{{ __('eng.created_by') }} <a href="#">{{ $exercise->user->name }}</a></h5>
+                @endif
             </div>
             <div class="content">
                 <p>{{ $exercise->description }}</p>
@@ -51,7 +53,11 @@
                     <tr>
                         <th scope="row">{{ $task['id'] }}</th>
                         <td>{{ $task['name'] }}</td>
+                        @if (isset($task->user))
                         <td><a href="{{ url('user/' . $task->user->id . '/detail') }}">{{ $task->user->name }}</a></td>
+                        @else
+                        <td></td>
+                        @endif
                         <td><a href="{{ url('task/' . $task['id'] . '/download') }}" class="btn btn-gradient-info ">{{ __('eng.download') }}</a></td>
                         @can('deleteEx', $group)
                         <td>
